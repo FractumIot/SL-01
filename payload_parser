@@ -1,5 +1,6 @@
 
-const rawValues = payload.find((item) => item.variable === 'payload'); //LOCALIZANDO O PAYLOAD(DADOS)
+
+const rawValues = raw_payload.find((item) => item.variable === 'payload'); //LOCALIZANDO O PAYLOAD(DADOS)
 
 
 if (rawValues)
@@ -9,20 +10,21 @@ if (rawValues)
 
 	//FAZENDO O FILTRO DOS DADOS DE ACORDO COM SUA POSIÇÃO
 	const filterIMEI = splitValues[1];
-	const filterSN = splitValues[25];
-	const filterTAG = splitValues[24];
-	const filterBAT = splitValues[9];
-	const filterTEMP = splitValues[10];
-	const filterUMID = splitValues[11];
-	const filterPACOTE = splitValues[18];
+	const filterSN = splitValues[27];
+	const filterTAG = splitValues[26];
+	const filterBAT = splitValues[11];
+	const filterTEMP = splitValues[12];
+	const filterUMID = splitValues[13];
+	const filterPACOTE = splitValues[20];
 	const filterIZero = splitValues[4];
 	const filterIUm = splitValues[5];
 	const filterIntZero = splitValues[6];
-	const filterCSQ = splitValues[20];
-	const filterRSSI = splitValues[21];
-	const filterOperadora = splitValues[23];
-	const filterData = splitValues[16];
-	const filterHora = splitValues[17];
+	const filterIntUm = splitValues[7];
+	const filterCSQ = splitValues[22];
+	const filterRSSI = splitValues[23];
+	const filterOperadora = splitValues[25];
+	const filterData = splitValues[18];
+	const filterHora = splitValues[19];
 
 
 	/* AQUI PASSO OUTRO FILTRO PARA SEPARAR O VALOR DO NOME. EX.: TEMPERATURA:29.54 
@@ -38,6 +40,7 @@ if (rawValues)
 	const IZeroValues = filterIZero.split(":");
 	const IUmValues = filterIUm.split(":");
 	const IntZeroValues = filterIntZero.split(":");
+	const IntUmValues = filterIntUm.split(":");
 	const CSQValues = filterCSQ.split(":");
 	const RSSIValues = filterRSSI.split(":");
 	const OperadoraValues = filterOperadora.split(":");
@@ -56,6 +59,7 @@ if (rawValues)
 	const IZero = IZeroValues[1];
 	const IUm = IUmValues[1];
 	const IntZero = IntZeroValues[1];
+	const IntUm = IntUmValues[1];
 	const CSQ = CSQValues[1];
 	const RSSI = RSSIValues[1];
 	const Operadora = OperadoraValues[1];
@@ -84,6 +88,7 @@ if (rawValues)
 
 	//AQUI INTRODUZO OS DADOS PARA O BUCKET
 	 
+	payload = [];
 	payload.push({ "variable": "IMEI", "value": IMEI});
 	payload.push({ "variable": "SN", "value": SN});
 	payload.push({ "variable": "TAG", "value": TAG, "location":{"lat": latitude, "lng": longitude}});  
@@ -94,10 +99,10 @@ if (rawValues)
 	payload.push({ "variable": "I0", "value": I_0, "time": TIMESTAMP_aux, "unit": "mA"});
 	payload.push({ "variable": "I1", "value": I_1, "time": TIMESTAMP_aux, "unit": "mA"});
 	payload.push({ "variable": "INT0", "value": IntZero, "time": TIMESTAMP_aux});
+	payload.push({ "variable": "INT1", "value": IntUm, "time": TIMESTAMP_aux});
 	payload.push({ "variable": "CSQ", "value": CSQ});
 	payload.push({ "variable": "RSSI", "value": RSSI});
 	payload.push({ "variable": "OPERADORA", "value": Operadora});		
 	payload.push({ "variable": "DATA", "value": TIMEZONE_aux});
 	
 }
-
