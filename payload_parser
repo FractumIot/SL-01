@@ -76,17 +76,17 @@ if (rawValues)
 		I_0 = 0;
 	};
 	
-	//const lat = device.params.find((x) => x.key === 'lat');
-	//const long = device.params.find((y) => y.key === 'lng');
+	const lat = device.params.find((x) => x.key === 'lat');
+	const long = device.params.find((y) => y.key === 'lng');
 	
-	//const latitude = Number(lat.value);
-	//const longitude = Number(long.value);
+	const latitude = Number(lat.value);
+	const longitude = Number(long.value);
 
 	//AQUI INTRODUZO OS DADOS PARA O BUCKET
 	 
 	payload.push({ "variable": "IMEI", "value": IMEI});
 	payload.push({ "variable": "SN", "value": SN});
-	payload.push({ "variable": "TAG", "value": TAG});  
+	payload.push({ "variable": "TAG", "value": TAG, "location":{"lat": latitude, "lng": longitude}});  
 	payload.push({ "variable": "Temperatura", "value": TEMPERATURA, "unit": "°C", "time": TIMESTAMP_aux});
 	payload.push({ "variable": "Bateria", "value": BATERIA, "unit": "V"});
 	payload.push({ "variable": "Pacote", "value": PACOTE});
